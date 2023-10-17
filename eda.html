@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>project - Exploratory Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./intro_lit_review.html" rel="" target="">
+ <span class="menu-text">Introduction and Literature Review</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./eda.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./methods.html" rel="" target="">
+ <span class="menu-text">Methods</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./results.html" rel="" target="">
+ <span class="menu-text">Results</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./discussion_conclusion.html" rel="" target="">
+ <span class="menu-text">Discussion and Conclusion</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation">Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#number-of-speeches-per-president" id="toc-number-of-speeches-per-president" class="nav-link" data-scroll-target="#number-of-speeches-per-president">Number of speeches per president</a></li>
+  <li><a href="#number-of-sentences-per-president" id="toc-number-of-sentences-per-president" class="nav-link" data-scroll-target="#number-of-sentences-per-president">Number of sentences per president</a></li>
+  <li><a href="#average-sentence-length-per-president" id="toc-average-sentence-length-per-president" class="nav-link" data-scroll-target="#average-sentence-length-per-president">Average sentence length per president</a></li>
+  <li><a href="#word-clouds-for-each-president" id="toc-word-clouds-for-each-president" class="nav-link" data-scroll-target="#word-clouds-for-each-president">Word clouds for each president</a></li>
+  <li><a href="#word-frequency-distribution-for-each-president" id="toc-word-frequency-distribution-for-each-president" class="nav-link" data-scroll-target="#word-frequency-distribution-for-each-president">Word frequency distribution for each president</a></li>
+  <li><a href="#n-gram-frequency-distributions-for-each-president" id="toc-n-gram-frequency-distributions-for-each-president" class="nav-link" data-scroll-target="#n-gram-frequency-distributions-for-each-president">N-gram frequency distributions for each president</a>
+  <ul class="collapse">
+  <li><a href="#bigrams" id="toc-bigrams" class="nav-link" data-scroll-target="#bigrams">Bigrams</a></li>
+  </ul></li>
+  <li><a href="#trigrams" id="toc-trigrams" class="nav-link" data-scroll-target="#trigrams">Trigrams</a></li>
+  <li><a href="#sentence-similarity-between-presidents" id="toc-sentence-similarity-between-presidents" class="nav-link" data-scroll-target="#sentence-similarity-between-presidents">Sentence similarity between presidents</a></li>
+  <li><a href="#bag-of-words-bow-representation" id="toc-bag-of-words-bow-representation" class="nav-link" data-scroll-target="#bag-of-words-bow-representation">Bag of Words (BOW) representation</a></li>
+  <li><a href="#tf-idf-representation" id="toc-tf-idf-representation" class="nav-link" data-scroll-target="#tf-idf-representation">TF-IDF representation</a></li>
+  <li><a href="#tokenization-with-padding-representation" id="toc-tokenization-with-padding-representation" class="nav-link" data-scroll-target="#tokenization-with-padding-representation">Tokenization with Padding representation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exploratory Data Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="data-preparation" class="level1">
+<h1>Data Preparation</h1>
+<p>The State of the Nation Address of the President of South Africa (SONA) is an annual event in which the President of South Africa reports on the status of the nation, normally to the resumption of a joint sitting of Parliament. You have been provided with full text of all State of the Nation Address (SONA) speeches, from 1994 through to 2022 . In years that elections took place, a State of the Nation Address happens twice, once before and again after the election</p>
+<p>The dataset (sourced from https://www.gov.za/state-nation-address) was comprised of a series of text files of the State of the Nation Addresses (SONA) from 1994 through 2022. Each speech’s content was subsequently ingested, omitting the initial lines. These speeches were then collated into a structured format for more convenient access and manipulation.</p>
+<p>Subsequently, essential metadata, including the year of the address and the name of the delivering president, were gleaned from the file naming conventions. Ater that, the removal of URLs, HTML character codes, and newline characters was performed. Additionally, the date of each address was extracted and appropriately formatted.</p>
+<p>To achieve the project’s objectives, each speech was dissected into its individual sentences. This granular breakdown facilitated the mapping of each sentence to its originating president. The finalised structured dataset comprises individual sentences paired with their respective presidents. This dataset was also saved as a csv file for future use.</p>
+<section id="number-of-speeches-per-president" class="level2">
+<h2 class="anchored" data-anchor-id="number-of-speeches-per-president">Number of speeches per president</h2>
+<div class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-4-output-1.png" width="661" height="469"></p>
+</div>
+</div>
+<p>The visualisation above illustrates the total number of speeches given by each president. Mbeki and Zuma had most speeches in the dataset, with 10 each. This means that there’s a substantial amount of data available for them, which could be advantageous when discerning their linguistic patterns, given that there is not a significant overlap in the sentences of the two presidents. Motlanthe and de Klerk only had one speech each, which may be an issue, due to an imbalance in the data, which may bias the model output later. To explore this further, the number of sentences per president is examined.</p>
+</section>
+<section id="number-of-sentences-per-president" class="level2">
+<h2 class="anchored" data-anchor-id="number-of-sentences-per-president">Number of sentences per president</h2>
+<div class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-5-output-1.png" width="661" height="469"></p>
+</div>
+</div>
+<p>The chart above gives a breakdown of the number of sentences spoken by each president. Zuma stands out with the most sentences, further underscoring his prominence in the dataset. Notably, while Mbeki gave three more speeches than Ramaphosa, their sentence count is nearly the same, implying that Ramaphosa’s speeches might be more verbose or detailed. This data provides a deeper understanding of the granularity of each president’s contribution and reaffirms the potential data imbalance to be addressed in model development, especially when considering the fact that de Klerk and Motlanthe have less than 300 sentences each, while the others have well over 1500.</p>
+</section>
+<section id="average-sentence-length-per-president" class="level2">
+<h2 class="anchored" data-anchor-id="average-sentence-length-per-president">Average sentence length per president</h2>
+<div class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-6-output-1.png" width="661" height="469"></p>
+</div>
+</div>
+<p>This chart unveils the average sentence length, in words, for each president. A striking observation is that Zuma, despite having the most sentences and speeches, has a relatively concise average sentence length. Conversely, Mbeki and Motlanthe have longer average sentence lengths, with Mbeki being the only president that had over 30 words per sentence, on average. This metric offers insights into the verbosity and style of each president, which can be a useful feature when discerning speech patterns in model building.</p>
+</section>
+<section id="word-clouds-for-each-president" class="level2">
+<h2 class="anchored" data-anchor-id="word-clouds-for-each-president">Word clouds for each president</h2>
+<div class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-7-output-1.png" width="890" height="2871"></p>
+</div>
+</div>
+<p>The word clouds offer a visually compelling representation of the most frequently used words by each president. The size of each word in the cloud corresponds to its frequency in the speeches. All the presidents had “will” as their most prominent word and referred to the country many times while speaking (highlighted by the use of the words “south” and “africa”/“african”). Motlanthe seemed to focus more on the economy and public image with the use of words such as “national”, “public” and “government”, whereas Mandela seemed to focus more on the people with the use of words such as “people” and “us”. de Klerk focused more on the constitution and forming alliances during a transitional period, and Zuma focused more on work and the development. These word clouds provide a snapshot of the focal points and themes of each president’s speeches. Distinctive words or terms can be potential features when building predictive models. The words from the wordclouds can also be seen in the bar plots below.</p>
+</section>
+<section id="word-frequency-distribution-for-each-president" class="level2">
+<h2 class="anchored" data-anchor-id="word-frequency-distribution-for-each-president">Word frequency distribution for each president</h2>
+<div class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-8-output-1.png" width="585" height="485"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-8-output-2.png" width="593" height="485"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-8-output-3.png" width="593" height="489"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-8-output-4.png" width="593" height="485"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-8-output-5.png" width="593" height="489"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-8-output-6.png" width="585" height="492"></p>
+</div>
+</div>
+</section>
+<section id="n-gram-frequency-distributions-for-each-president" class="level2">
+<h2 class="anchored" data-anchor-id="n-gram-frequency-distributions-for-each-president">N-gram frequency distributions for each president</h2>
+<section id="bigrams" class="level3">
+<h3 class="anchored" data-anchor-id="bigrams">Bigrams</h3>
+<div class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-9-output-1.png" width="585" height="521"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-9-output-2.png" width="585" height="561"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-9-output-3.png" width="585" height="529"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-9-output-4.png" width="585" height="497"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-9-output-5.png" width="585" height="521"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-9-output-6.png" width="585" height="540"></p>
+</div>
+</div>
+<p>Instead of only looking at single word frequency, bigrams can also be used to find the most common two-word phrases. The bigrams above elucidate the distinctive linguistic patterns and thematic foci of each president, presenting opportunities for differentiation. For instance, President Mandela’s frequently used bigrams, such as “South Africans” and “national unity,” reflect his emphasis on nation-building and reconciliation during his tenure. In contrast, President Zuma’s bigrams like “economic growth” suggest a policy-driven discourse concentrated on economic dynamics. However, there are potential pitfalls. Overlapping or common bigrams across presidents, such as generic terms or phrases prevalent in political discourse, could introduce ambiguity, potentially hindering the model’s precision. Additionally, while President Ramaphosa’s bigrams like “South Africa” are distinctly frequent, they are not uniquely attributable to him, as such phrases are likely universal across South African presidencies.</p>
+</section>
+</section>
+<section id="trigrams" class="level2">
+<h2 class="anchored" data-anchor-id="trigrams">Trigrams</h2>
+<div class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-10-output-1.png" width="645" height="566"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-10-output-2.png" width="615" height="569"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-10-output-3.png" width="651" height="572"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-10-output-4.png" width="609" height="594"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-10-output-5.png" width="585" height="567"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-10-output-6.png" width="660" height="581"></p>
+</div>
+</div>
+<p>Expanding on the analysis of linguistic markers, trigrams offer insights into the most recurrent three-word sequences employed by each president. The trigram outputs above further refine our understanding of the unique verbal choices and thematic concerns of each leader. For instance, President Mandela’s recurrent trigrams, such as “people of South Africa”, underscore his consistent focus on inclusive nationhood and the collective identity of South Africans. Meanwhile, President Zuma’s trigrams, such as “fellow South Africans,” indicate a direct and inclusive addressal style, perhaps aiming for rapport-building with the populace. Conversely, the presence of generic or universally applicable trigrams, such as “State of the Nation”, might pose challenges. These broadly-used trigrams, inherent to political addresses across presidencies, might dilute the distinctive features of individual presidents, complicating the model’s task. Moreover, trigrams like “State of the Nation Address” from President Ramaphosa, although salient, are emblematic of speeches common to all presidents, making them less distinguishing. Thus, while trigrams can accentuate the nuances of each president’s discourse, the model would benefit from discerning the balance between distinctiveness and generic trigram usage.</p>
+</section>
+<section id="sentence-similarity-between-presidents" class="level2">
+<h2 class="anchored" data-anchor-id="sentence-similarity-between-presidents">Sentence similarity between presidents</h2>
+</section>
+<section id="bag-of-words-bow-representation" class="level2">
+<h2 class="anchored" data-anchor-id="bag-of-words-bow-representation">Bag of Words (BOW) representation</h2>
+<div class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-12-output-1.png" width="941" height="653"></p>
+</div>
+</div>
+<p>The Bag-of-Words (BoW) visualisation above reveals a pronounced central cluster with substantial overlap across presidential sentences, indicating pervasive shared linguistic elements. This convergence towards common terms suggests that the BoW representation predominantly captures universal themes and terminologies characteristic of political discourse. Such patterns, while illuminating shared linguistic tendencies, underscore potential challenges in predictive modeling, with the BoW approach possibly lacking the granularity to detect distinctive linguistic markers for each president.</p>
+</section>
+<section id="tf-idf-representation" class="level2">
+<h2 class="anchored" data-anchor-id="tf-idf-representation">TF-IDF representation</h2>
+<div class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-13-output-1.png" width="941" height="653"></p>
+</div>
+</div>
+<p>Using the TF-IDF representation, the visualization depicts a dominant central cluster, reaffirming the presence of overlapping linguistic constructs across presidential discourses. Unlike the BoW representation, the TF-IDF visualization lacks discernible smaller clusters, and data points appear more dispersed. This dispersion underscores the varied thematic undertones each president might have explored, but the pronounced overlap in the central region suggests that these thematic variations are not sufficiently distinct in the TF-IDF space to provide clear demarcations. The observed patterns emphasize the challenges inherent in solely relying on TF-IDF for capturing the unique linguistic nuances of each president.</p>
+</section>
+<section id="tokenization-with-padding-representation" class="level2">
+<h2 class="anchored" data-anchor-id="tokenization-with-padding-representation">Tokenization with Padding representation</h2>
+<div class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<p><img src="eda_files/figure-html/cell-14-output-1.png" width="950" height="653"></p>
+</div>
+</div>
+<p>Utilising tokenization with padding, the resultant visualization presents multiple clusters, indicating the method’s ability to recognize shared linguistic constructs or thematic groupings within the dataset. Notably, the significant intermingling of presidents within these clusters underscores the shared nature of discourse patterns across different presidencies. The absence of a dominant central cluster, a divergence from the BoW and TF-IDF representations, alludes to a more nuanced and diverse sentence representation in the embedding space, potentially attributed to the emphasis on sentence structure inherent in the tokenization method.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>project - Methods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./intro_lit_review.html" rel="" target="">
+ <span class="menu-text">Introduction and Literature Review</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./eda.html" rel="" target="">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./methods.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Methods</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./results.html" rel="" target="">
+ <span class="menu-text">Results</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./discussion_conclusion.html" rel="" target="">
+ <span class="menu-text">Discussion and Conclusion</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#text-representation-techniques" id="toc-text-representation-techniques" class="nav-link active" data-scroll-target="#text-representation-techniques">1. Text Representation Techniques</a>
+  <ul class="collapse">
+  <li><a href="#a.-bag-of-words-bow" id="toc-a.-bag-of-words-bow" class="nav-link" data-scroll-target="#a.-bag-of-words-bow">a. Bag-of-Words (BoW)</a></li>
+  <li><a href="#b.-term-frequency-inverse-document-frequency-tf-idf" id="toc-b.-term-frequency-inverse-document-frequency-tf-idf" class="nav-link" data-scroll-target="#b.-term-frequency-inverse-document-frequency-tf-idf">b. Term Frequency-Inverse Document Frequency (TF-IDF)</a></li>
+  <li><a href="#c.-text-embedding" id="toc-c.-text-embedding" class="nav-link" data-scroll-target="#c.-text-embedding">c.&nbsp;Text Embedding</a></li>
+  </ul></li>
+  <li><a href="#model-architectures-and-training" id="toc-model-architectures-and-training" class="nav-link" data-scroll-target="#model-architectures-and-training">2. Model Architectures and Training</a>
+  <ul class="collapse">
+  <li><a href="#a.-feed-forward-neural-network" id="toc-a.-feed-forward-neural-network" class="nav-link" data-scroll-target="#a.-feed-forward-neural-network">a. Feed-Forward Neural Network</a></li>
+  <li><a href="#b.-support-vector-machine-svm" id="toc-b.-support-vector-machine-svm" class="nav-link" data-scroll-target="#b.-support-vector-machine-svm">b. Support Vector Machine (SVM)</a></li>
+  <li><a href="#c.-naive-bayes-classifier" id="toc-c.-naive-bayes-classifier" class="nav-link" data-scroll-target="#c.-naive-bayes-classifier">c.&nbsp;Naive Bayes Classifier</a></li>
+  </ul></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">3. Model Evaluation</a>
+  <ul class="collapse">
+  <li><a href="#a.-accuracy" id="toc-a.-accuracy" class="nav-link" data-scroll-target="#a.-accuracy">a. Accuracy</a></li>
+  <li><a href="#b.-precision" id="toc-b.-precision" class="nav-link" data-scroll-target="#b.-precision">b. Precision</a></li>
+  <li><a href="#c.-recall-or-sensitivity" id="toc-c.-recall-or-sensitivity" class="nav-link" data-scroll-target="#c.-recall-or-sensitivity">c.&nbsp;Recall (or Sensitivity)</a></li>
+  <li><a href="#d.-f1-score" id="toc-d.-f1-score" class="nav-link" data-scroll-target="#d.-f1-score">d.&nbsp;F1 Score</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Methods</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="text-representation-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="text-representation-techniques">1. Text Representation Techniques</h2>
+<section id="a.-bag-of-words-bow" class="level3">
+<h3 class="anchored" data-anchor-id="a.-bag-of-words-bow">a. Bag-of-Words (BoW)</h3>
+<p>The Bag-of-Words (BoW) representation is a simplistic yet effective method for text data representation. It hinges on representing text by its constituent words, disregarding their order. Here, each word operates as a feature, with the text being represented by a vector that denotes the frequency of each word.</p>
+<p>Formally, given a vocabulary <span class="math inline">\(V\)</span> comprising <span class="math inline">\(N\)</span> unique words, each document $d $can be depicted as a vector $<em>d $in $^N ), where the i-th element $v</em>{d,i} $denotes the frequency of the i-th word in the document:</p>
+<p><span class="math display">\[
+\mathbf{v}_d = [v_{d,1}, v_{d,2}, \ldots, v_{d,N}]
+\]</span></p>
+<p>The dataset was transformed into a BoW representation with each row corresponding to a sentence, and each column reflecting the frequency of a word in that sentence. The <code>CountVectorizer</code> class from the <code>sklearn.feature_extraction.text</code> module was employed for this task, with English stop words being excluded to filter out prevalent words that lack significant meaning, such as “and”, “the”, and “is”.</p>
+</section>
+<section id="b.-term-frequency-inverse-document-frequency-tf-idf" class="level3">
+<h3 class="anchored" data-anchor-id="b.-term-frequency-inverse-document-frequency-tf-idf">b. Term Frequency-Inverse Document Frequency (TF-IDF)</h3>
+<p>Contrastingly, the TF-IDF representation scales the frequency of words based on their occurrence across all documents, ensuring that words appearing too frequently across documents (potentially bearing lesser discriminative importance) are assigned lower weights.</p>
+<p>The term frequency (TF) of a word in a document is the raw count of that word in the document. The inverse document frequency (IDF) of a word is defined as:</p>
+<p><span class="math display">\[
+\text{IDF}(w) = \log \left( \frac{N}{1 + \text{count}(w)} \right)
+\]</span></p>
+<p>where $N $signifies the total number of documents and $(w) $represents the number of documents containing the word $w ). The TF-IDF value for a word in a document is then the product of its TF and IDF values.</p>
+<p>The <code>TfidfVectorizer</code> class from the <code>sklearn.feature_extraction.text</code> module was employed to transform our dataset into this representation.</p>
+</section>
+<section id="c.-text-embedding" class="level3">
+<h3 class="anchored" data-anchor-id="c.-text-embedding">c.&nbsp;Text Embedding</h3>
+<p>For processing by deep learning models like neural networks, textual data was tokenized and converted into sequences of numbers. The <code>Tokenizer</code> class from the <code>keras.preprocessing.text</code> module was utilized for this purpose. Subsequently, sentences were padded with zeros using <code>pad_sequences</code> from the <code>keras.preprocessing.sequence</code> module to ensure uniform length.</p>
+</section>
+</section>
+<section id="model-architectures-and-training" class="level2">
+<h2 class="anchored" data-anchor-id="model-architectures-and-training">2. Model Architectures and Training</h2>
+<section id="a.-feed-forward-neural-network" class="level3">
+<h3 class="anchored" data-anchor-id="a.-feed-forward-neural-network">a. Feed-Forward Neural Network</h3>
+<p>Feed-forward neural networks (FFNNs) are a subset of artificial neural networks characterized by acyclic connections between nodes. They encompass multiple layers: an input layer, several hidden layers, and an output layer.</p>
+<p>The architecture of the neural network employed in this study is delineated as follows:</p>
+<ul>
+<li><strong>Input Layer</strong>: This layer harbors neurons equal to the number of features in the dataset (word counts for BoW and TF-IDF, sequence length for text embeddings). The Rectified Linear Unit (ReLU) activation function was utilized owing to its efficiency and capability to mitigate the vanishing gradient issue:</li>
+</ul>
+<p><span class="math display">\[
+f(x) = \max(0, x)
+\]</span></p>
+<ul>
+<li><p><strong>Hidden Layers</strong>: Several hidden layers were introduced, each utilizing He initialization, which is proficient for layers with ReLU activation. A dropout layer succeeded each hidden layer to curb overfitting by randomly nullifying a fraction of input units during each training update.</p></li>
+<li><p><strong>Output Layer</strong>: This layer contains neurons equal to the number of classes (presidents, in our scenario). The softmax function was employed as the activation function, generating a probability distribution over the classes:</p></li>
+</ul>
+<p><span class="math display">\[
+\sigma(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}
+\]</span></p>
+<p>for $i = 1, , K $and $ $is the input vector to the softmax function.</p>
+<p>Training was conducted using the Adam optimization algorithm with a learning rate of 0.001. Adam is adept at training deep neural networks via computing adaptive learning rates for each parameter, leveraging moving averages of the parameter gradients and squared gradients.</p>
+<p>The <code>EarlyStopping</code> and <code>ReduceLROnPlateau</code> callbacks were also enlisted. The former halts the training process if validation loss ceases to improve for a stipulated number of epochs, while the latter diminishes the learning rate if the validation loss reaches a plateau.</p>
+</section>
+<section id="b.-support-vector-machine-svm" class="level3">
+<h3 class="anchored" data-anchor-id="b.-support-vector-machine-svm">b. Support Vector Machine (SVM)</h3>
+<p>The Support Vector Machine (SVM) is a supervised learning algorithm suitable for both classification and regression tasks. It operates by identifying the optimal hyperplane that segregates a dataset into distinct classes. Provided a set of training examples, each labeled as belonging to one of two categories, the SVM training algorithm constructs a model that categorizes new examples into one of the two categories.</p>
+<p>Mathematically, given labeled training data $(x_1, y_1), , (x_N, y_N) $where $ x_i $belongs to $ ^D $and $ y_i $is either 1 or -1 (indicating the class the input $ x_i $belongs to), SVM seeks the hyperplane defined by $ w $and $ b $that optimally separates the data points of the two classes:</p>
+<p><span class="math display">\[
+y_i(w \cdot x_i + b) \geq 1
+\]</span></p>
+<p>The objective of SVM is to maximize the margin, which is the distance between the hyperplane and the nearest point from either class. The decision function is then given by:</p>
+<p><span class="math display">\[
+f(x) = \text{sign}(w \cdot x + b)
+\]</span></p>
+</section>
+<section id="c.-naive-bayes-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="c.-naive-bayes-classifier">c.&nbsp;Naive Bayes Classifier</h3>
+<p>Naive Bayes is a probabilistic classifier predicated on Bayes’ theorem with strong (naive) independence assumptions among features. Given a set of features $X = x_1, , x_n $and a class variable $C ), Bayes’ theorem states:</p>
+<p><span class="math display">\[
+P(C|X) = \frac{P(X|C) \times P(C)}{P(X)}
+\]</span></p>
+<p>The Naive Bayes classifier posits that the effect of a particular feature in a class is independent of other features. This simplification expedites computation, hence the term ‘naive’.</p>
+<p>In our problem, the Naive Bayes classifier estimates the probability of a sentence belonging to each president’s class based on the features (word frequencies for BoW or TF-IDF values). The sentence is then classified to the class (president) with the highest probability.</p>
+</section>
+</section>
+<section id="model-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation">3. Model Evaluation</h2>
+<p>Evaluating the performance of machine learning models is paramount as it unveils the efficacy of the model and areas of potential improvement. Our evaluation paradigm leverages standard metrics including accuracy, precision, recall, and F1 score to quantify various facets of the model’s predictions in a multi-class classification setting such as ours, where predictions could be true or false for multiple classes (presidents, in this case).</p>
+<section id="a.-accuracy" class="level3">
+<h3 class="anchored" data-anchor-id="a.-accuracy">a. Accuracy</h3>
+<p>Accuracy furn</p>
+<p>ishes a broad overview of the model’s performance and is calculated as the ratio of correct predictions to the total predictions:</p>
+<p><span class="math display">\[
+\text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}
+\]</span></p>
+<p>Nonetheless, in imbalanced datasets, accuracy could be misleading.</p>
+</section>
+<section id="b.-precision" class="level3">
+<h3 class="anchored" data-anchor-id="b.-precision">b. Precision</h3>
+<p>Precision scrutinizes the model’s positive predictions. Specifically, it computes the frequency at which the model correctly predicted a specific president out of all predictions for that president:</p>
+<p><span class="math display">\[
+\text{Precision (for a given president)} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+\]</span></p>
+<p>Where: - True Positives (TP): The number of sentences correctly identified as belonging to that president. - False Positives (FP): The number of sentences erroneously identified as belonging to that president, while they belong to a different one.</p>
+<p>Precision is particularly crucial in scenarios where the cost of a false positive is high.</p>
+</section>
+<section id="c.-recall-or-sensitivity" class="level3">
+<h3 class="anchored" data-anchor-id="c.-recall-or-sensitivity">c.&nbsp;Recall (or Sensitivity)</h3>
+<p>Recall evaluates how effectively the model identifies sentences from a specific president. It calculates the proportion of actual sentences from a president that the model correctly identified:</p>
+<p><span class="math display">\[
+\text{Recall (for a given president)} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
+\]</span></p>
+<p>Where: - False Negatives (FN): The number of sentences that genuinely belong to a president but were misclassified as belonging to another.</p>
+<p>Recall is vital in contexts where missing a true instance is significant.</p>
+</section>
+<section id="d.-f1-score" class="level3">
+<h3 class="anchored" data-anchor-id="d.-f1-score">d.&nbsp;F1 Score</h3>
+<p>The F1 score is the harmonic mean of precision and recall, providing a balance between them. It achieves its best value at 1 (perfect precision and recall) and its worst at 0:</p>
+<p><span class="math display">\[
+\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\]</span></p>
+<p>The F1 score is particularly useful when there is an uneven data distribution among classes.</p>
+<p>These metrics were computed for each president in our dataset and then averaged (weighted by the number of true instances for each president) to derive a single value representing the overall model’s performance. This approach ensures that the model’s aptitude to predict less frequent classes (presidents with fewer sentences) is considered, rendering the evaluation more robust and representative of the model’s true capabilities in a multi-class setting.</p>
+<p>Moreover, the models were also assessed on separate training and test datasets. The training dataset is the learning corpus for the model, while the test dataset presents a fresh, unseen set of data points to gauge the model’s generalization to new data. This separation is pivotal to ensure that the model doesn’t merely memorize the training data (overfitting), but discerns the underlying patterns determining which president uttered a given sentence.</p>
+<p>Lastly, model validation during training utilized early stopping and learning rate reduction based on validation loss, ensuring the model doesn’t over-train and begins to perform worse on unseen data. Callbacks in the neural network training process monitored the validation loss and amended the training process accordingly.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
