@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -107,6 +126,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./discussion_conclusion.html" rel="" target="">
  <span class="menu-text">Discussion and Conclusion</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./code_appendix.html" rel="" target="">
+ <span class="menu-text">Code for Assignment 1</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -169,55 +192,55 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="text-representation-techniques">1. Text Representation Techniques</h2>
 <section id="a.-bag-of-words-bow" class="level3">
 <h3 class="anchored" data-anchor-id="a.-bag-of-words-bow">a. Bag-of-Words (BoW)</h3>
-<p>The Bag-of-Words (BoW) representation is a simplistic yet effective method for text data representation. It hinges on representing text by its constituent words, disregarding their order. Here, each word operates as a feature, with the text being represented by a vector that denotes the frequency of each word.</p>
-<p>Formally, given a vocabulary <span class="math inline">\(V\)</span> comprising <span class="math inline">\(N\)</span> unique words, each document $d $can be depicted as a vector $<em>d $in $^N ), where the i-th element $v</em>{d,i} $denotes the frequency of the i-th word in the document:</p>
+<p>The Bag-of-Words (BoW) representation is a simplistic yet effective method for text data representation. It hinges on representing text by its constituent words, disregarding their order. Here, each word operates as a feature, with the text being represented by a vector that denotes the frequency of each word <span class="citation" data-cites="vm2019implementation">(<a href="#ref-vm2019implementation" role="doc-biblioref">V M and Kumar R 2019</a>)</span>.</p>
+<p>Formally, given a vocabulary <span class="math inline">\(V\)</span> comprising <span class="math inline">\(N\)</span> unique words, each document <span class="math inline">\(d\)</span> can be depicted as a vector <span class="math inline">\(\mathbf{v}_d\)</span> in <span class="math inline">\(\mathbb{R}^N\)</span> , where the i-th element <span class="math inline">\(v_{d,i}\)</span> denotes the frequency of the i-th word in the document:</p>
 <p><span class="math display">\[
 \mathbf{v}_d = [v_{d,1}, v_{d,2}, \ldots, v_{d,N}]
 \]</span></p>
-<p>The dataset was transformed into a BoW representation with each row corresponding to a sentence, and each column reflecting the frequency of a word in that sentence. The <code>CountVectorizer</code> class from the <code>sklearn.feature_extraction.text</code> module was employed for this task, with English stop words being excluded to filter out prevalent words that lack significant meaning, such as “and”, “the”, and “is”.</p>
+<p>The dataset was transformed into a BoW representation with each row corresponding to a sentence, and each column reflecting the frequency of a word in that sentence. The <code>CountVectorizer</code> class from the <code>sklearn.feature_extraction.text</code> module was employed for this task, with English stop words being excluded to filter out prevalent words that lack significant meaning, such as “and”, “the”, and “is” <span class="citation" data-cites="pedregosa2011scikit">(<a href="#ref-pedregosa2011scikit" role="doc-biblioref">Pedregosa et al. 2011</a>)</span>.</p>
 </section>
 <section id="b.-term-frequency-inverse-document-frequency-tf-idf" class="level3">
 <h3 class="anchored" data-anchor-id="b.-term-frequency-inverse-document-frequency-tf-idf">b. Term Frequency-Inverse Document Frequency (TF-IDF)</h3>
-<p>Contrastingly, the TF-IDF representation scales the frequency of words based on their occurrence across all documents, ensuring that words appearing too frequently across documents (potentially bearing lesser discriminative importance) are assigned lower weights.</p>
+<p>Contrastingly, the TF-IDF representation scales the frequency of words based on their occurrence across all documents, ensuring that words appearing too frequently across documents (potentially bearing lesser discriminative importance) are assigned lower weights <span class="citation" data-cites="geeksforgeekstfidf"><span>“Understanding TF-IDF: A Simple Introduction”</span> (<a href="#ref-monkeylearntfidf" role="doc-biblioref">n.d.</a>)</span>.</p>
 <p>The term frequency (TF) of a word in a document is the raw count of that word in the document. The inverse document frequency (IDF) of a word is defined as:</p>
 <p><span class="math display">\[
 \text{IDF}(w) = \log \left( \frac{N}{1 + \text{count}(w)} \right)
 \]</span></p>
-<p>where $N $signifies the total number of documents and $(w) $represents the number of documents containing the word $w ). The TF-IDF value for a word in a document is then the product of its TF and IDF values.</p>
-<p>The <code>TfidfVectorizer</code> class from the <code>sklearn.feature_extraction.text</code> module was employed to transform our dataset into this representation.</p>
+<p>where <span class="math inline">\(N\)</span> signifies the total number of documents and <span class="math inline">\(\text{count}(w)\)</span> represents the number of documents containing the word <span class="math inline">\(w\)</span>. The TF-IDF value for a word in a document is then the product of its TF and IDF values <span class="citation" data-cites="geeksforgeekstfidf"><span>“Understanding TF-IDF: A Simple Introduction”</span> (<a href="#ref-monkeylearntfidf" role="doc-biblioref">n.d.</a>)</span>.</p>
+<p>The <code>TfidfVectorizer</code> class from the <code>sklearn.feature_extraction.text</code> module was employed to transform our dataset into this representation <span class="citation" data-cites="pedregosa2011scikit">(<a href="#ref-pedregosa2011scikit" role="doc-biblioref">Pedregosa et al. 2011</a>)</span>.</p>
 </section>
 <section id="c.-text-embedding" class="level3">
 <h3 class="anchored" data-anchor-id="c.-text-embedding">c.&nbsp;Text Embedding</h3>
-<p>For processing by deep learning models like neural networks, textual data was tokenized and converted into sequences of numbers. The <code>Tokenizer</code> class from the <code>keras.preprocessing.text</code> module was utilized for this purpose. Subsequently, sentences were padded with zeros using <code>pad_sequences</code> from the <code>keras.preprocessing.sequence</code> module to ensure uniform length.</p>
+<p>For processing by deep learning models like neural networks, textual data was tokenized and converted into sequences of numbers. The <code>Tokenizer</code> class from the <code>keras.preprocessing.text</code> module was utilized for this purpose. Subsequently, sentences were padded with zeros using <code>pad_sequences</code> from the <code>keras.preprocessing.sequence</code> module to ensure uniform length <span class="citation" data-cites="chollet2015keras">(<a href="#ref-chollet2015keras" role="doc-biblioref">Chollet et al. 2015</a>)</span>.</p>
 </section>
 </section>
 <section id="model-architectures-and-training" class="level2">
 <h2 class="anchored" data-anchor-id="model-architectures-and-training">2. Model Architectures and Training</h2>
 <section id="a.-feed-forward-neural-network" class="level3">
 <h3 class="anchored" data-anchor-id="a.-feed-forward-neural-network">a. Feed-Forward Neural Network</h3>
-<p>Feed-forward neural networks (FFNNs) are a subset of artificial neural networks characterized by acyclic connections between nodes. They encompass multiple layers: an input layer, several hidden layers, and an output layer.</p>
+<p>Feed-forward neural networks (FFNNs) are a subset of artificial neural networks characterized by acyclic connections between nodes. They encompass multiple layers: an input layer, several hidden layers, and an output layer <span class="citation" data-cites="rumelhart1986learning">(<a href="#ref-rumelhart1986learning" role="doc-biblioref">Rumelhart, Hinton, and Williams 1986</a>)</span>.</p>
 <p>The architecture of the neural network employed in this study is delineated as follows:</p>
 <ul>
-<li><strong>Input Layer</strong>: This layer harbors neurons equal to the number of features in the dataset (word counts for BoW and TF-IDF, sequence length for text embeddings). The Rectified Linear Unit (ReLU) activation function was utilized owing to its efficiency and capability to mitigate the vanishing gradient issue:</li>
+<li>Input Layer: This layer harbors neurons equal to the number of features in the dataset (word counts for BoW and TF-IDF, sequence length for text embeddings). The Rectified Linear Unit (ReLU) activation function was utilized owing to its efficiency and capability to mitigate the vanishing gradient issue:</li>
 </ul>
 <p><span class="math display">\[
 f(x) = \max(0, x)
 \]</span></p>
 <ul>
-<li><p><strong>Hidden Layers</strong>: Several hidden layers were introduced, each utilizing He initialization, which is proficient for layers with ReLU activation. A dropout layer succeeded each hidden layer to curb overfitting by randomly nullifying a fraction of input units during each training update.</p></li>
-<li><p><strong>Output Layer</strong>: This layer contains neurons equal to the number of classes (presidents, in our scenario). The softmax function was employed as the activation function, generating a probability distribution over the classes:</p></li>
+<li><p>Hidden Layers: Several hidden layers were introduced, each utilizing He initialization, which is proficient for layers with ReLU activation. A dropout layer succeeded each hidden layer to curb overfitting by randomly nullifying a fraction of input units during each training update.</p></li>
+<li><p>Output Layer: This layer contains neurons equal to the number of classes (presidents, in our scenario). The softmax function was employed as the activation function, generating a probability distribution over the classes:</p></li>
 </ul>
 <p><span class="math display">\[
 \sigma(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}
 \]</span></p>
-<p>for $i = 1, , K $and $ $is the input vector to the softmax function.</p>
+<p>for <span class="math inline">\(i = 1, \ldots, K\)</span> and <span class="math inline">\(\mathbf{z}\)</span> is the input vector to the softmax function.</p>
 <p>Training was conducted using the Adam optimization algorithm with a learning rate of 0.001. Adam is adept at training deep neural networks via computing adaptive learning rates for each parameter, leveraging moving averages of the parameter gradients and squared gradients.</p>
-<p>The <code>EarlyStopping</code> and <code>ReduceLROnPlateau</code> callbacks were also enlisted. The former halts the training process if validation loss ceases to improve for a stipulated number of epochs, while the latter diminishes the learning rate if the validation loss reaches a plateau.</p>
+<p>The <code>EarlyStopping</code> and <code>ReduceLROnPlateau</code> callbacks were also enlisted. The former halts the training process if validation loss ceases to improve for a stipulated number of epochs, while the latter diminishes the learning rate if the validation loss reaches a plateau <span class="citation" data-cites="chollet2015keras">(<a href="#ref-chollet2015keras" role="doc-biblioref">Chollet et al. 2015</a>)</span>.</p>
 </section>
 <section id="b.-support-vector-machine-svm" class="level3">
 <h3 class="anchored" data-anchor-id="b.-support-vector-machine-svm">b. Support Vector Machine (SVM)</h3>
-<p>The Support Vector Machine (SVM) is a supervised learning algorithm suitable for both classification and regression tasks. It operates by identifying the optimal hyperplane that segregates a dataset into distinct classes. Provided a set of training examples, each labeled as belonging to one of two categories, the SVM training algorithm constructs a model that categorizes new examples into one of the two categories.</p>
-<p>Mathematically, given labeled training data $(x_1, y_1), , (x_N, y_N) $where $ x_i $belongs to $ ^D $and $ y_i $is either 1 or -1 (indicating the class the input $ x_i $belongs to), SVM seeks the hyperplane defined by $ w $and $ b $that optimally separates the data points of the two classes:</p>
+<p>The Support Vector Machine (SVM) is a supervised learning algorithm suitable for both classification and regression tasks. It operates by identifying the optimal hyperplane that segregates a dataset into distinct classes. Provided a set of training examples, each labeled as belonging to one of two categories, the SVM training algorithm constructs a model that categorizes new examples into one of the two categories <span class="citation" data-cites="cortes1995support">(<a href="#ref-cortes1995support" role="doc-biblioref">Cortes and Vapnik 1995</a>)</span>.</p>
+<p>Mathematically, given labeled training data <span class="math inline">\((x_1, y_1), \ldots, (x_N, y_N)\)</span> where <span class="math inline">\(x_i\)</span> belongs to <span class="math inline">\(\mathbb{R}^D\)</span> and <span class="math inline">\(y_i\)</span> is either 1 or -1 (indicating the class the input <span class="math inline">\(x_i\)</span> belongs to), SVM seeks the hyperplane defined by <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> that optimally separates the data points of the two classes <span class="citation" data-cites="cortes1995support">(<a href="#ref-cortes1995support" role="doc-biblioref">Cortes and Vapnik 1995</a>)</span>:</p>
 <p><span class="math display">\[
 y_i(w \cdot x_i + b) \geq 1
 \]</span></p>
@@ -228,11 +251,11 @@ f(x) = \text{sign}(w \cdot x + b)
 </section>
 <section id="c.-naive-bayes-classifier" class="level3">
 <h3 class="anchored" data-anchor-id="c.-naive-bayes-classifier">c.&nbsp;Naive Bayes Classifier</h3>
-<p>Naive Bayes is a probabilistic classifier predicated on Bayes’ theorem with strong (naive) independence assumptions among features. Given a set of features $X = x_1, , x_n $and a class variable $C ), Bayes’ theorem states:</p>
+<p>Naive Bayes is a probabilistic classifier predicated on Bayes’ theorem with strong (naive) independence assumptions among features <span class="citation" data-cites="raschka2014naive">(<a href="#ref-raschka2014naive" role="doc-biblioref">Raschka 2014</a>)</span>. Given a set of features <span class="math inline">\(X = x_1, \ldots, x_n\)</span> and a class variable <span class="math inline">\(C\)</span>, Bayes’ theorem states:</p>
 <p><span class="math display">\[
 P(C|X) = \frac{P(X|C) \times P(C)}{P(X)}
 \]</span></p>
-<p>The Naive Bayes classifier posits that the effect of a particular feature in a class is independent of other features. This simplification expedites computation, hence the term ‘naive’.</p>
+<p>The Naive Bayes classifier posits that the effect of a particular feature in a class is independent of other features. This simplification expedites computation, hence the term ‘naive’ <span class="citation" data-cites="raschka2014naive">(<a href="#ref-raschka2014naive" role="doc-biblioref">Raschka 2014</a>)</span>.</p>
 <p>In our problem, the Naive Bayes classifier estimates the probability of a sentence belonging to each president’s class based on the features (word frequencies for BoW or TF-IDF values). The sentence is then classified to the class (president) with the highest probability.</p>
 </section>
 </section>
@@ -241,8 +264,7 @@ P(C|X) = \frac{P(X|C) \times P(C)}{P(X)}
 <p>Evaluating the performance of machine learning models is paramount as it unveils the efficacy of the model and areas of potential improvement. Our evaluation paradigm leverages standard metrics including accuracy, precision, recall, and F1 score to quantify various facets of the model’s predictions in a multi-class classification setting such as ours, where predictions could be true or false for multiple classes (presidents, in this case).</p>
 <section id="a.-accuracy" class="level3">
 <h3 class="anchored" data-anchor-id="a.-accuracy">a. Accuracy</h3>
-<p>Accuracy furn</p>
-<p>ishes a broad overview of the model’s performance and is calculated as the ratio of correct predictions to the total predictions:</p>
+<p>Accuracy furnishes a broad overview of the model’s performance and is calculated as the ratio of correct predictions to the total predictions:</p>
 <p><span class="math display">\[
 \text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}
 \]</span></p>
@@ -254,7 +276,11 @@ P(C|X) = \frac{P(X|C) \times P(C)}{P(X)}
 <p><span class="math display">\[
 \text{Precision (for a given president)} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
 \]</span></p>
-<p>Where: - True Positives (TP): The number of sentences correctly identified as belonging to that president. - False Positives (FP): The number of sentences erroneously identified as belonging to that president, while they belong to a different one.</p>
+<p>Where:</p>
+<ul>
+<li><p>True Positives (TP): The number of sentences correctly identified as belonging to that president.</p></li>
+<li><p>False Positives (FP): The number of sentences erroneously identified as belonging to that president, while they belong to a different one.</p></li>
+</ul>
 <p>Precision is particularly crucial in scenarios where the cost of a false positive is high.</p>
 </section>
 <section id="c.-recall-or-sensitivity" class="level3">
@@ -263,7 +289,10 @@ P(C|X) = \frac{P(X|C) \times P(C)}{P(X)}
 <p><span class="math display">\[
 \text{Recall (for a given president)} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
 \]</span></p>
-<p>Where: - False Negatives (FN): The number of sentences that genuinely belong to a president but were misclassified as belonging to another.</p>
+<p>Where:</p>
+<ul>
+<li>False Negatives (FN): The number of sentences that genuinely belong to a president but were misclassified as belonging to another.</li>
+</ul>
 <p>Recall is vital in contexts where missing a true instance is significant.</p>
 </section>
 <section id="d.-f1-score" class="level3">
@@ -275,13 +304,38 @@ P(C|X) = \frac{P(X|C) \times P(C)}{P(X)}
 <p>The F1 score is particularly useful when there is an uneven data distribution among classes.</p>
 <p>These metrics were computed for each president in our dataset and then averaged (weighted by the number of true instances for each president) to derive a single value representing the overall model’s performance. This approach ensures that the model’s aptitude to predict less frequent classes (presidents with fewer sentences) is considered, rendering the evaluation more robust and representative of the model’s true capabilities in a multi-class setting.</p>
 <p>Moreover, the models were also assessed on separate training and test datasets. The training dataset is the learning corpus for the model, while the test dataset presents a fresh, unseen set of data points to gauge the model’s generalization to new data. This separation is pivotal to ensure that the model doesn’t merely memorize the training data (overfitting), but discerns the underlying patterns determining which president uttered a given sentence.</p>
-<p>Lastly, model validation during training utilized early stopping and learning rate reduction based on validation loss, ensuring the model doesn’t over-train and begins to perform worse on unseen data. Callbacks in the neural network training process monitored the validation loss and amended the training process accordingly.</p>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-chollet2015keras" class="csl-entry" role="listitem">
+Chollet, Francois et al. 2015. <span>“Keras.”</span> GitHub. 2015. <a href="https://github.com/fchollet/keras">https://github.com/fchollet/keras</a>.
+</div>
+<div id="ref-cortes1995support" class="csl-entry" role="listitem">
+Cortes, Corinna, and Vladimir Vapnik. 1995. <span>“Support-Vector Networks.”</span> <em>Machine Learning</em> 20 (3): 273–97.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, et al. 2011. <span>“Scikit-Learn: Machine Learning in Python.”</span>
+</div>
+<div id="ref-raschka2014naive" class="csl-entry" role="listitem">
+Raschka, Sebastian. 2014. <span>“Naive Bayes and Text Classification i - Introduction and Theory.”</span> <em>arXiv Preprint arXiv:1410.5329</em>.
+</div>
+<div id="ref-rumelhart1986learning" class="csl-entry" role="listitem">
+Rumelhart, David E, Geoffrey E Hinton, and Ronald J Williams. 1986. <span>“Learning Representations by Back-Propagating Errors.”</span> <em>Nature</em> 323 (6088): 533–36.
+</div>
+<div id="ref-geeksforgeekstfidf" class="csl-entry" role="listitem">
+<span>“Understanding TF-IDF (Term Frequency-Inverse Document Frequency).”</span> n.d. <a href="https://www.geeksforgeeks.org/understanding-tf-idf-term-frequency-inverse-document-frequency/" class="uri">https://www.geeksforgeeks.org/understanding-tf-idf-term-frequency-inverse-document-frequency/</a>.
+</div>
+<div id="ref-monkeylearntfidf" class="csl-entry" role="listitem">
+<span>“Understanding TF-IDF: A Simple Introduction.”</span> n.d. <a href="https://monkeylearn.com/blog/what-is-tf-idf/" class="uri">https://monkeylearn.com/blog/what-is-tf-idf/</a>.
+</div>
+<div id="ref-vm2019implementation" class="csl-entry" role="listitem">
+V M, Nisha, and Dr. Ashok Kumar R. 2019. <span>“Implementation on Text Classification Using Bag of Words Model.”</span> In <em>Proceedings of the Second International Conference on Emerging Trends in Science &amp; Technologies for Engineering Systems (ICETSE-2019)</em>. <a href="https://doi.org/10.2139/ssrn.3507923">https://doi.org/10.2139/ssrn.3507923</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

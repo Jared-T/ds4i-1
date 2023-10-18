@@ -108,6 +108,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./discussion_conclusion.html" rel="" target="">
  <span class="menu-text">Discussion and Conclusion</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./code_appendix.html" rel="" target="">
+ <span class="menu-text">Code for Assignment 1</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -1272,6 +1276,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="bert-embeddings-with-pre-trained-classifier" class="level2">
 <h2 class="anchored" data-anchor-id="bert-embeddings-with-pre-trained-classifier">BERT Embeddings with pre-trained classifier</h2>
+<p>The code for this section was adapted from the following source: <a href="https://www.tensorflow.org/text/tutorials/classify_text_with_bert">Google Tensorflow BERT tutorial</a></p>
 <p>Utilising the BERT embedding in tandem with a pre-trained model, a strategy known as transfer learning, distinctive patterns in performance were observed. Throughout the training epochs, the training accuracy showcased a consistent uptick. However, the validation accuracy plateaued rather swiftly, exhibiting minimal fluctuations thereafter. At the culmination of the training, the accuracy metrics stood as follows: training accuracy at 0.759, validation accuracy at 0.684, and a slightly higher test accuracy of 0.712. Further delving into the test set metrics, the precision was 0.71, recall was 0.707, and the f1 score was close behind at 0.708. An examination of the confusion matrix for the test set underscored these findings. The model predominantly made accurate predictions for the respective presidents, mirroring the positive metrics mentioned earlier. This highlights the efficacy of the BERT embeddings and transfer learning in this particular context, as the results were substantially more favourable than some other methods previously explored.</p>
 <div class="cell" data-execution_count="68">
 <div class="cell-output cell-output-display">

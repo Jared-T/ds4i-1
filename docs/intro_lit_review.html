@@ -124,6 +124,10 @@ div.csl-indent {
     <a class="nav-link" href="./discussion_conclusion.html" rel="" target="">
  <span class="menu-text">Discussion and Conclusion</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./code_appendix.html" rel="" target="">
+ <span class="menu-text">Code for Assignment 1</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -158,15 +162,21 @@ div.csl-indent {
 
 </header>
 
-<p>In the socio-political landscape, the manner and content of how leaders communicate provides critical insight into their governance style, priorities, and ideology. The State of the Nation Address (SONA) serves as an essential touchstone in South Africa’s political calendar, where the sitting president not only provides an annual report on the nation’s status but also sets the tone for policy directions and government intent for the subsequent year. Delivered at the commencement of a joint sitting of Parliament, particularly in election years, this address receives heightened scrutiny, given that it occurs twice: pre- and post-election.</p>
+<p>In the socio-political landscape, the manner and content of how leaders communicate provides critical insight into their governance style, priorities, and ideology. The State of the Nation Address (SONA) serves as an essential touchstone in South Africa’s political calendar, where the sitting president not only provides an annual report on the nation’s status but also sets the tone for policy directions and government intent for the subsequent year. Delivered at the commencement of a joint sitting of Parliament, particularly in election years, this address receives heightened scrutiny, given that it occurs twice: pre- and post-election <span class="citation" data-cites="sona2023">(<a href="#ref-sona2023" role="doc-biblioref">African 2023</a>)</span>.</p>
 <p>Natural Language Processing (NLP) has been increasingly leveraged in the domain of political science to uncover patterns, biases, and ideologies in the speeches and writings of political leaders. Recent advancements in machine learning and NLP tools have enabled more refined text analysis, going beyond mere word frequency to semantic content and stylistic nuances. Researchers such as Katre <span class="citation" data-cites="Katre2019">(<a href="#ref-Katre2019" role="doc-biblioref">2019</a>)</span> and Glavas, Nanni and Ponzetto <span class="citation" data-cites="glavas-etal-2019-computational">(<a href="#ref-glavas-etal-2019-computational" role="doc-biblioref">2019</a>)</span> have demonstrated the efficacy of using NLP to categorise and analyse political speeches. This raises the question: Can we discern, based purely on textual analysis, which South African president might have uttered a particular sentence during their SONA speech? In other words - can we predict the author of a sentence based on the content and style of the sentence?</p>
-<p>However, while there is an abundance of literature on NLP applications in sentiment analysis and topic modelling, its application to discern between specific authors or speakers, especially in the South African political sphere, remains largely unexplored. This gap is particularly noticeable when considering the unique linguistic, cultural, and political landscape of South Africa. The challenges lie not just in the variety of linguistic styles but also in the depth and breadth of topics covered, as well as the personal idiosyncrasies of each president (within a single speech as well as over time).</p>
+<p>However, while there is an abundance of literature on NLP applications in sentiment analysis and topic modelling, its application to discern between specific authors or speakers, especially in the South African political sphere, remains largely unexplored (although there has been some development with regards to creating text resources for South African languages <span class="citation" data-cites="Eiselen2014">(<a href="#ref-Eiselen2014" role="doc-biblioref">Eiselen and Puttkammer 2014</a>)</span>). This gap is particularly noticeable when considering the unique linguistic, cultural, and political landscape of South Africa. The challenges lie not just in the variety of linguistic styles but also in the depth and breadth of topics covered, as well as the personal idiosyncrasies of each president (within a single speech as well as over time).</p>
 <p>Given the above context, this paper aims to predict which of the South African presidents between 1994 and 2022 might have said a specific sentence during their SONA address. It leverages various text transformation techniques, such as Bag of Words (BoW), Term Frequency-Inverse Document Frequency (tf-idf), and text embeddings (a very simple embedding as well as BERT). Subsequent application of machine learning models, including a feed-forward neural net, Support Vector Machine (SVM), Naive Bayes, and a BERT classification model, offers a comparative lens to evaluate the efficacy of each approach.</p>
 
 
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-sona2023" class="csl-entry" role="listitem">
+African, The South. 2023. <span>“SONA 2023: Everything You Need to Know about State of the Nation Address.”</span> 2023. <a href="https://www.thesouthafrican.com/news/sona-2023-everything-you-need-know-about-state-ofnation-address-sona-2023-breaking-news-9-february-2023/">https://www.thesouthafrican.com/news/sona-2023-everything-you-need-know-about-state-ofnation-address-sona-2023-breaking-news-9-february-2023/</a>.
+</div>
+<div id="ref-Eiselen2014" class="csl-entry" role="listitem">
+Eiselen, Roald, and Martin J. Puttkammer. 2014. <span>“Developing Text Resources for Ten South African Languages.”</span> In <em>Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC’14)</em>, edited by Nicoletta Calzolari, Khalid Choukri, Thierry Declerck, Hrafn Loftsson, Bente Maegaard, Joseph Mariani, Asuncion Moreno, Jan Odijk, and Stelios Piperidis. Reykjavik, Iceland: European Language Resources Association (ELRA).
+</div>
 <div id="ref-glavas-etal-2019-computational" class="csl-entry" role="listitem">
 Glavaš, Goran, Federico Nanni, and Simone Paolo Ponzetto. 2019. <span>“Computational Analysis of Political Texts: Bridging Research Efforts Across Communities.”</span> In <em>Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics: Tutorial Abstracts</em>, 18–23. Florence, Italy: Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/P19-4004">https://doi.org/10.18653/v1/P19-4004</a>.
 </div>
